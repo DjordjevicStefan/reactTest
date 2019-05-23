@@ -23,6 +23,53 @@
   color: #61dafb;
 }
 
+/* custom bootstrap colors and mine custom css  */
+
+.my-nav {
+  background-color:  #26418f !important ;
+}
+
+.my-nav-link {
+  color: #ffffff ;
+}
+
+.logo-color {
+  color : #ffff74 ;
+}
+
+.jumbotron {
+  max-height: 7rem ;
+  padding: 0 ;
+  padding-bottom: 5px;
+  background-color:  #5C6BC0 ;
+  color: #ffffff ;
+}
+
+.table-name{
+  background-color:  #EEEEEE ;
+  text-align: center ;
+  font-size:  2rem ;
+}
+
+.click-th {
+  cursor: pointer ;
+}
+
+/* custom buttons  */
+
+.mdc-button {
+  background-color: #FFD740;
+      color: #000000;
+}
+
+/* custom navbar links  */
+
+a:hover, a:active {
+  color: #ffff74 ;
+}
+
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
