@@ -1,22 +1,55 @@
 import React, { Component } from 'react';
 import AdminNavbar from './common/adminNavbar';
-import {getUserWorkOrders} from "../fakeServices/users" ;
+import getAllUsers from "../services/users";
+import { toast, ToastContainer } from "react-toastify";
+
+import TableName from "./common/tableName";
 
 
 class Users extends Component {
-  // state = {  }
+  state = { 
+    users : null 
+   }
+
+
+   async componentDidMount() {
+    try {
+      const { data: users } = await getAllUsers();
+      this.setState({ users: users });  
+
+    } catch (error) {
+      if (error.status === 400) {
+        toast.error("database error!");
+      }
+    }
+  }
+       
   render() { 
 
-    let test = getUserWorkOrders(1);
-     
-    console.log(test);
-    
+    const {users} = this.state ;
+
+    if (this.state.users === null) {
+      return (
+        
+        <div>
+          
+          <AdminNavbar pageName="Users"/>
+          <TableName tablename="Loading...." />
+          <ToastContainer />
+        </div>
+      );
+    }
+   
 
 
     return ( 
       <div>
-      <AdminNavbar pageName = "Users" />
-      <h1>heloooo</h1>
+      <AdminNavbar pageName = "Users"  />
+       <ul>
+         {users.map(x=> 
+           <li>{x.email}</li>
+          )}
+       </ul>
       </div>
      );
   }

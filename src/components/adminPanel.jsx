@@ -1,45 +1,103 @@
-import React, { Component } from 'react'
-import AdminNavbar from './common/adminNavbar';
+import React, { Component } from "react";
+import AdminNavbar from "./common/adminNavbar";
 
-import getAllWorkorders from "../fakeServices/workOrders" ;
-import AdminTable from './semicommon/adminTable';
+import getAllWorkorders from "../services/workOrders";
+
+import AdminTable from "./semicommon/adminTable";
+import { toast, ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+import TableName from "./common/tableName";
+
 
 class AdminPanel extends Component {
-  state = { 
-    orders : [],
-    btnStatus : "pending",
-    sortColumn : { path:  "buildingNmb" , order : "asc" }
-   }
+  state = {
+    orders: null,
+    btnStatus: "pending",
+    sortColumn: { path: "buildingNmb", order: "asc" }
+  };
 
   //// http request from the mongo database
-  componentDidMount(){
-    let initalOrders =  getAllWorkorders();
-    this.setState({orders: initalOrders})
-  }
-  
-  //// show correct order status
-  handleChangeStatus =()=> {
-       if (this.state.btnStatus === "pending") return (this.setState({btnStatus : "sent"}));
-       if (this.state.btnStatus === "sent") return (this.setState({btnStatus : "pending"}));
-  }
+  async componentDidMount() {
+    try {
+      //// for pro days 
 
-  //// sorting the table 
-  handleSort = (path) => {
-    
-    if (this.state.sortColumn.path === path) {
-      let order = (this.state.sortColumn.order === "asc") ? "desc" : "asc" ;
-      this.setState({sortColumn: { path: path, order : order  }})
-    } else {
-      this.setState({sortColumn: { path: path, order : "asc"  }})
+      // const { data: users } = await getAllUsers();
+      // this.setState({ users: users });
+
+      const { data: orders } = await getAllWorkorders();
+      this.setState({ orders: orders });
+
+    } catch (error) {
+      if (error.status === 400) {
+        toast.error("database error!");
+      }
     }
   }
 
-  render() { 
-    return ( <div>
-      <AdminNavbar pageName="admin panel" />
-      <AdminTable sortColumn={this.state.sortColumn} onSort={this.handleSort} onChange={this.handleChangeStatus} status={this.state.btnStatus} allOrders={this.state.orders}/>
-    </div> );
+  //// show correct order status
+  handleChangeStatus = () => {
+    if (this.state.btnStatus === "pending")
+      return this.setState({ btnStatus: "sent" });
+    if (this.state.btnStatus === "sent")
+      return this.setState({ btnStatus: "pending" });
+  };
+
+  //// sorting the table
+  handleSort = path => {
+    if (this.state.sortColumn.path === path) {
+      let order = this.state.sortColumn.order === "asc" ? "desc" : "asc";
+      this.setState({ sortColumn: { path: path, order: order } });
+    } else {
+      this.setState({ sortColumn: { path: path, order: "asc" } });
+    }
+  };
+
+  checkEmpty = () => {
+    if (this.state.orders.length === 0) {
+      return (
+        <div>
+          <p className="h4">There is no work orders at this moment</p>
+        </div>
+      );
+    }
+  };
+
+  render() {
+    if (this.state.orders === null) {
+      return (
+        // <BrowserRouter >
+        <div>
+          
+          <AdminNavbar pageName="admin panel"/>
+          <TableName tablename="Loading...." />
+          <ToastContainer />
+        </div>
+      );
+    }
+
+    return (
+      // <BrowserRouter>
+      <div>
+        <ToastContainer />
+        <AdminNavbar pageName="admin panel"/>
+         
+         {/* <Switch>
+        <Route path="/users" exact component={Users} />
+        </Switch> */}
+         
+        <AdminTable
+          checkEmpty={this.checkEmpty}
+          sortColumn={this.state.sortColumn}
+          onSort={this.handleSort}
+          onChange={this.handleChangeStatus}
+          status={this.state.btnStatus}
+          allOrders={this.state.orders}
+        />
+      </div>
+      // /* </BrowserRouter> */
+    );
   }
 }
- 
+
 export default AdminPanel;

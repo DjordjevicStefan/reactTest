@@ -3,21 +3,14 @@ import {Link} from "react-router-dom"
 import TableName from "../common/tableName";
 import _ from "lodash";
 
-const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn }) => {
+const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn, checkEmpty }) => {
   //// filter orders by state prop
   let filteredOrders = allOrders.filter(order => order.status === status);
 
   //// sorting work oreders /// returns a arrey
   let sorted = _.orderBy(filteredOrders, [sortColumn.path], [sortColumn.order]);
 
-  //// if work orders are empty  don't render the table
-  if (allOrders.length === 0)
-    return (
-      <div>
-        <p className="h4">There is no work orders at this moment</p>
-      </div>
-    );
-
+  
    //// changing asc/desc arrow depending on the user interaction
   let arrowIcon = path => {
     if (sortColumn.path === path) {
@@ -28,31 +21,32 @@ const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn }) => {
   return (
     <div className="container">
       <TableName tablename="Work orders" />
+      {checkEmpty()}
       <table className="table">
         <thead>
           <tr>
             <th scope="col">Select</th>
             <th
               className="click-th"
-              onClick={() => onSort("buildingNmb")}
+              onClick={() => onSort("buildingNumber")}
               scope="col"
             >
-              {arrowIcon("buildingNmb")}
+              {arrowIcon("buildingNumber")}
               Building number
             </th>
             <th
               className="click-th"
-              onClick={() => onSort("apartmentNmb")}
+              onClick={() => onSort("apartmentNumber")}
               scope="col"
             >
-              {arrowIcon("apartmentNmb")}
+              {arrowIcon("apartmentNumber")}
               Apartment number
             </th>
             <th className="click-th" 
-            onClick={() => onSort("user")} 
+            onClick={() => onSort("firstName")} 
             scope="col"
             >
-              {arrowIcon("user")} 
+              {arrowIcon("firstName")} 
               User
             </th>
             <th scope="col">
@@ -72,11 +66,11 @@ const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn }) => {
           ) : null}
           {sorted.map(order => (
             
-            <tr key={order.id}>
+            <tr key={order._id}>
               <td> <button className="mdc-button btn-sm btn">Select</button> </td>
-              <td>{order.buildingNmb}</td>
-              <td>{order.apartmentNmb}</td>
-              <td> {order.user}</td> 
+              <td>{order.buildingNumber}</td>
+              <td>{order.apartmentNumber}</td>
+              <td> {order.firstName +" " + order.lastName}</td> 
               <td>{order.status}</td>
             </tr>
             

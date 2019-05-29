@@ -5,7 +5,7 @@ const AdminNavbar = (props) => {
   return ( 
     <div>
     <nav className="my-nav navbar navbar-expand-lg ">
-       <Link to="/" className="logo-color">BenLeeds</Link>
+       <Link to="/admin" className="logo-color">BenLeeds</Link>
   
  
     <ul className="navbar-nav ml-auto">
