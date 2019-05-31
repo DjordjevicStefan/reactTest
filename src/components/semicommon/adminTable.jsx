@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 import TableName from "../common/tableName";
 import _ from "lodash";
 
-const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn, checkEmpty }) => {
+const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn, checkEmpty, findUser }) => {
   //// filter orders by state prop
   let filteredOrders = allOrders.filter(order => order.status === status);
 
@@ -70,7 +70,7 @@ const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn, checkEmpt
               <td> <button className="mdc-button btn-sm btn">Select</button> </td>
               <td>{order.buildingNumber}</td>
               <td>{order.apartmentNumber}</td>
-              <td> {order.firstName +" " + order.lastName}</td> 
+              <td> {findUser(order.userId)}</td> 
               <td>{order.status}</td>
             </tr>
             

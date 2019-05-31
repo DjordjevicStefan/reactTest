@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AdminNavbar from "./common/adminNavbar";
 
 import getAllWorkorders from "../services/workOrders";
+import getAllUsers from "../services/users";
 
 import AdminTable from "./semicommon/adminTable";
 import { toast, ToastContainer } from "react-toastify";
@@ -13,6 +14,7 @@ import TableName from "./common/tableName";
 class AdminPanel extends Component {
   state = {
     orders: null,
+    users: null,
     btnStatus: "pending",
     sortColumn: { path: "buildingNmb", order: "asc" }
   };
@@ -22,8 +24,8 @@ class AdminPanel extends Component {
     try {
       //// for pro days 
 
-      // const { data: users } = await getAllUsers();
-      // this.setState({ users: users });
+      const { data: users } = await getAllUsers();
+      this.setState({ users: users });
 
       const { data: orders } = await getAllWorkorders();
       this.setState({ orders: orders });
@@ -53,6 +55,15 @@ class AdminPanel extends Component {
     }
   };
 
+  //////// finding user by workorder
+  findUserByWo = (workorderId) => {
+    let userObj = this.state.users.find(e => {
+          return e._id === workorderId;
+        });
+    let name = userObj.firstName + " " + userObj.lastName ;
+    return name ;
+  }
+
   checkEmpty = () => {
     if (this.state.orders.length === 0) {
       return (
@@ -69,7 +80,7 @@ class AdminPanel extends Component {
         // <BrowserRouter >
         <div>
           
-          <AdminNavbar pageName="admin panel"/>
+          <AdminNavbar pageName="Admin panel"/>
           <TableName tablename="Loading...." />
           <ToastContainer />
         </div>
@@ -80,7 +91,7 @@ class AdminPanel extends Component {
       // <BrowserRouter>
       <div>
         <ToastContainer />
-        <AdminNavbar pageName="admin panel"/>
+        <AdminNavbar pageName="Admin panel"/>
          
          {/* <Switch>
         <Route path="/users" exact component={Users} />
@@ -93,6 +104,7 @@ class AdminPanel extends Component {
           onChange={this.handleChangeStatus}
           status={this.state.btnStatus}
           allOrders={this.state.orders}
+          findUser = {this.findUserByWo}
         />
       </div>
       // /* </BrowserRouter> */

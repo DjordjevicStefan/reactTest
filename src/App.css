@@ -23,7 +23,11 @@
   color: #61dafb;
 }
 
-/* custom bootstrap colors and mine custom css  */
+/* custom bootstrap colors and mine custom bootstrpa css  */
+
+.form-adj{
+  margin-top: -0.8rem ;
+}
 
 .my-nav {
   background-color:  #26418f !important ;
@@ -55,11 +59,39 @@
   cursor: pointer ;
 }
 
+.form-container{
+  width: 70vw ;
+  background-color: #EEEEEE ;
+  color:  black ;
+  height:  auto ;
+  margin:  0 auto ;
+  padding-top:  1rem ;
+}
+
+.form-css{
+  margin-bottom: -1rem ;
+}
+
 /* custom buttons  */
 
 .mdc-button {
   background-color: #FFD740;
       color: #000000;
+}
+
+
+
+.btn-table-end{
+  background-color:  #5C6BC0 ;
+  color: #ffffff ;
+  border-radius: 5px ;
+  height: 2rem ;
+  text-align: center;
+  line-height: 2rem ;
+}
+
+.btn-table-end:hover {
+  cursor: pointer ;
 }
 
 /* custom navbar links  */

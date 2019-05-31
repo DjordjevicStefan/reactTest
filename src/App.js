@@ -11,6 +11,8 @@ import './App.css';
 import AdminPanel from './components/adminPanel';
 import Users from './components/users';
 
+import User from './components/user';
+
 
 function App() {
   return (
@@ -18,7 +20,9 @@ function App() {
        <Switch>
         
          <Route path="/admin" exact component={AdminPanel} />
+         <Route path="/users/:id"  component={User} />
          <Route path="/users"  component={Users} />
+         <Redirect to="/admin" />
        </Switch>
         
       

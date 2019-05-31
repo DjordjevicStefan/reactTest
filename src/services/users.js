@@ -42,6 +42,9 @@ import http from "./httpService" ;
 //   return workOrderList;
 // }
 
+export function getUser(id) {
+  return http.get(`http://localhost:3500/admin/users/${id}`)
+}
 
 export default function getAllUsers() {
   return http.get("http://localhost:3500/admin/users")
