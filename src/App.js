@@ -19,10 +19,12 @@ function App() {
     <div className="App">
        <Switch>
         
-         <Route path="/admin" exact component={AdminPanel} />
-         <Route path="/users/:id"  component={User} />
-         <Route path="/users"  component={Users} />
-         <Redirect to="/admin" />
+        
+         <Route path="/admin/users/:id"  component={User} />
+         <Route path="/admin/users"  component={Users} />
+         <Route path="/admin"  component={AdminPanel} />
+        
+         {/* <Redirect to="/admin" /> */}
        </Switch>
         
       

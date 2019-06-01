@@ -27,6 +27,11 @@
 
 .form-adj{
   margin-top: -0.8rem ;
+  
+}
+
+.form-adj-last {
+  margin-bottom: 0 ;
 }
 
 .my-nav {
@@ -90,8 +95,21 @@
   line-height: 2rem ;
 }
 
+
+
 .btn-table-end:hover {
   cursor: pointer ;
+}
+
+.btn-form-submit{
+  background-color:  #5C6BC0 ;
+  color: #ffffff ;
+  border-radius: 5px ;
+  height: 2rem ;
+  text-align: center;
+  /* line-height: 2rem ; */
+  width:100%;
+  display:block;
 }
 
 /* custom navbar links  */

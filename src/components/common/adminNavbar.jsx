@@ -10,7 +10,7 @@ const AdminNavbar = (props) => {
  
     <ul className="navbar-nav ml-auto">
       <li className="ml-2 nav-item">
-        <Link className="nav-link my-nav-link" to="/users" >Users </Link>
+        <Link className="nav-link my-nav-link" to="/admin/users" >Users </Link>
       </li>
       <li className="ml-2 nav-item">
         <Link className="nav-link my-nav-link" to="/vendors" >Vendors</Link>
@@ -22,7 +22,7 @@ const AdminNavbar = (props) => {
         <Link className="nav-link my-nav-link" to="/jobs" >Jobs</Link>
       </li>
       <li className="ml-2 nav-item">
-        <Link className="nav-link my-nav-link" to="/workorders" >Work orders</Link>
+        <Link className="nav-link my-nav-link" to="/admin" >Work orders</Link>
       </li>
       
     </ul>

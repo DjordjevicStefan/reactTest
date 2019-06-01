@@ -43,7 +43,7 @@ class Users extends Component {
 
   //// try to insert link element on click , for later !!!!!!!!!!!
   newUserRoute =() => {
-    this.props.history.push("/users/new") ;
+    this.props.history.push("/admin/users/new") ;
   }
 
   render() {
@@ -88,7 +88,7 @@ class Users extends Component {
             {users.map(user => (
               <tr key={user._id}>
                 <td>
-                  <Link to={`/users/${user._id}`} className="mdc-button btn-sm btn">Select</Link>
+                  <Link to={`/admin/users/${user._id}`} className="mdc-button btn-sm btn">Select</Link>
                 </td>
                 <td>{user.firstName + " " + user.lastName}</td>
                 <td>{user.region}</td>
