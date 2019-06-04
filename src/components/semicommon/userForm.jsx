@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import Input from "../common/input";
+import {Modal} from "react-bootstrap" ;
+
+
+
 
 class UserForm extends Component {
   // state = {};
-
-  render() {
+   render() {
     const {
       firstName,
       onChange,
@@ -13,28 +16,35 @@ class UserForm extends Component {
       region,
       password,
       email,
-      onSubmit
+      onSubmit,
+      emailPassword,
+      error,
+      id,
+        
     } = this.props;
 
     return (
       <div>
         <div className="form-container">
           <div>
+         
             <form onSubmit={onSubmit} className="form-css">
-              <Input
-                error={this.props.error}
+              <Input  
+                error={error.firstName}
                 label="First name"
                 name="firstName"
                 value={firstName}
                 onChange={onChange}
               />
                <Input
+                error={error.lastName}
                 label="Last name"
                 name="lastName"
                 value={lastName}
                 onChange={onChange}
               />
                <Input
+               error={error.password}
                 label="Password"
                 name="password"
                 value={password}
@@ -42,23 +52,28 @@ class UserForm extends Component {
                 type="password"
               />
                <Input
+                error={error.email}
                 label="Email"
                 name="email"
                 value={email}
                 onChange={onChange}
               />
+              <Input
+                error={error.emailPassword}
+                label="Email Password"
+                name="emailPassword"
+                value={emailPassword}
+                onChange={onChange}
+              />
                <Input
+                error={error.region}
                 label="Region"
                 name="region"
                 value={region}
                 onChange={onChange}
                 
               />
-              <div className="form-group form-adj-last">
-                <button className="mdc-button btn-sm btn mb-1">
-                  Show all work orders
-                </button>
-              </div>
+
 
               <div className="row">
               <div className="col-6">
@@ -67,10 +82,11 @@ class UserForm extends Component {
                 </button>
               </div>
               <div className="col-6">
-                <button className="btn-form-submit">{(email==="") ? "Add new user" : "Edit user" }</button>
+                <button className="btn-form-submit">{(id==="") ? "Add new user" : "Edit user" }</button>
               </div>
             </div>
             </form>
+           
            
           </div>
         </div>

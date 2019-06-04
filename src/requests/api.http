@@ -2,15 +2,16 @@
 # content-type: application/json
 
 # {
-# "email": "john@gmail.com",
-# "password": "test2",
-# "firstName": "pakao2",
-# "lastName": "Doe2",
-# "region": "Denver2"
+# "email": "losaSamZatebe@gmail.com",
+# "password": "test5",
+# "emailPasswrd" : "test4" ,
+# "firstName": "Jarni",
+# "lastName": "Brzi",
+# "region": "Denver5"
 # }
 
-# DELETE http://localhost:3500/admin/users/5cee78500d7d35067041b261
-# content-type: application/json
-
-GET http://localhost:3500/admin/users/5cee78500d7d35067041b261 
+DELETE http://localhost:3500/admin/users/5cf65ba3fb8d2ea33366d5a7
 content-type: application/json
+
+# GET http://localhost:3500/admin/users/5cee78500d7d35067041b261 
+# content-type: application/json

@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import AdminNavbar from "./common/adminNavbar";
 import getAllUsers from "../services/users";
+import {deleteUser} from "../services/users" ;
 import { toast, ToastContainer } from "react-toastify";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom" ;
+
+
+import $ from "jquery" ;
 
 import TableName from "./common/tableName";
+
 
 class Users extends Component {
   state = {
@@ -25,20 +30,48 @@ class Users extends Component {
 
 
   hadnleDelteUser = (userX) =>  {
-    let yesNo = window.confirm(`Are you sure you wont to delete ${userX.firstName} ${userX.lastName} ?`)
-     
-    if (yesNo === true) {
-      let users = this.state.users.filter(user => user._id !== userX._id);
-      this.setState({users : users})
-    } else {
+    // const usersCopy = {...this.state.users} ;
 
-    }
+    // let yesNo = window.confirm(`Are you sure you wont to delete ${userX.firstName} ${userX.lastName} ?`)
+     
+    // if (yesNo === true) {
+    //   let users = this.state.users.filter(user => user._id !== userX._id);
+    //   this.setState({users : users}) ;
+    // } else {
+    //      return null ;
+    // }
+     
+    console.log(userX);
+    
+    deleteUser();
    
+    // const response  = await deleteUser(userX._id);
+    //   console.log(response);
+
+    //   if (response.data.error) {
+    //       toast.error(response.data.error);
+          // this.setState({users : usersCopy}) ;
+      // }
+
+    //   $.ajax({
+    //     url: `http://localhost:3500/admin/users/5cf42e7c5f4fda2348dd54ca`,
+    //     type: 'DELETE',
+    //     success: function(result) {
+    //         console.log(result);
+            
+    //     }
+    // });
+    
+    
+      
+    
+
+
     
   }
 
   handleBack = () => {
-    this.props.history.goBack() ;
+    this.props.history.push("/admin") ;
   }
 
   //// try to insert link element on click , for later !!!!!!!!!!!
@@ -62,6 +95,7 @@ class Users extends Component {
 
     return (
       <div>
+        <ToastContainer />
         <AdminNavbar pageName="Users" />
 
     <div className="container">

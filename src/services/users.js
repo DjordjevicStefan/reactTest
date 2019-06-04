@@ -1,5 +1,7 @@
 // import getAllWorkorders from "./workOrders";
 import http from "./httpService" ;
+import qs from "qs"
+import $ from "jquery" ;
 
 // const allWorkOrders = getAllWorkorders();
 
@@ -44,6 +46,45 @@ import http from "./httpService" ;
 
 export function getUser(id) {
   return http.get(`http://localhost:3500/admin/users/${id}`)
+}
+
+export function saveUser(user) {
+  if (user._id === "") {
+    
+    return http.post(`http://localhost:3500/admin/newUser`, qs.stringify({
+    email: user.email,
+    password: user.password,
+    emailPassword: user.emailPassword,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    region: user.region
+})) ;
+  } 
+  return http.post(`http://localhost:3500/admin/editUser/${user._id}`, qs.stringify({
+      email: user.email,
+      password: user.password,
+      emailPassword: user.emailPassword,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      region: user.region
+  })) ;
+ 
+}
+
+export function deleteUser() {
+//   console.log("test2");
+  
+//   $.ajax({
+//     url: "http://localhost:3500/admin/users/5cf4344c5f4fda2348dd54cd",
+//     type: "DELETE",
+//     success: function(result){
+//         console.log(result);
+//     }   
+// });
+    
+console.log("test3");  
+
+  // return http.delete(`http://localhost:3500/admin/users/5cf4344c5f4fda2348dd54cd`, {"Content-Type": "application/json"} ) ;
 }
 
 export default function getAllUsers() {
