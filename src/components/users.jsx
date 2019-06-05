@@ -6,9 +6,10 @@ import { toast, ToastContainer } from "react-toastify";
 import { Link } from "react-router-dom" ;
 
 
-import $ from "jquery" ;
+
 
 import TableName from "./common/tableName";
+
 
 
 class Users extends Component {
@@ -29,45 +30,25 @@ class Users extends Component {
 
 
 
-  hadnleDelteUser = (userX) =>  {
-    // const usersCopy = {...this.state.users} ;
+  hadnleDeleteUser = async (userX) =>  {
+    const usersCopy = {...this.state.users} ;
 
-    // let yesNo = window.confirm(`Are you sure you wont to delete ${userX.firstName} ${userX.lastName} ?`)
+    let yesNo = window.confirm(`Are you sure you wont to delete ${userX.firstName} ${userX.lastName} ?`)
      
-    // if (yesNo === true) {
-    //   let users = this.state.users.filter(user => user._id !== userX._id);
-    //   this.setState({users : users}) ;
-    // } else {
-    //      return null ;
-    // }
-     
-    console.log(userX);
-    
-    deleteUser();
+    if (yesNo === true) {
+      let users = this.state.users.filter(user => user._id !== userX._id);
+      this.setState({users : users}) ;
+    } else {
+         return ;
+    }
    
-    // const response  = await deleteUser(userX._id);
-    //   console.log(response);
+    const response  = await deleteUser(userX._id);
+      console.log(response);
 
-    //   if (response.data.error) {
-    //       toast.error(response.data.error);
-          // this.setState({users : usersCopy}) ;
-      // }
-
-    //   $.ajax({
-    //     url: `http://localhost:3500/admin/users/5cf42e7c5f4fda2348dd54ca`,
-    //     type: 'DELETE',
-    //     success: function(result) {
-    //         console.log(result);
-            
-    //     }
-    // });
-    
-    
-      
-    
-
-
-    
+      if (response.data.error) {
+          toast.error(response.data.error);
+          this.setState({users : usersCopy}) ;
+      }
   }
 
   handleBack = () => {
@@ -100,7 +81,7 @@ class Users extends Component {
 
     <div className="container">
         <TableName tablename="List of users" />
-        <table className="table">
+        <table className="table table-bordered">
           <thead>
             <tr>
               <th scope="col">Select</th>
@@ -127,7 +108,7 @@ class Users extends Component {
                 <td>{user.firstName + " " + user.lastName}</td>
                 <td>{user.region}</td>
                 <td>
-                  <button  onClick={() => this.hadnleDelteUser(user)} className="btn-sm btn btn-danger">Delete</button>
+                  <button  onClick={() => this.hadnleDeleteUser(user)} className="btn-sm btn btn-danger">Delete</button>
                 </td>
               </tr>
             ))}

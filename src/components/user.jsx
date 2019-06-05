@@ -62,9 +62,15 @@ class User extends Component {
 
     try {
       const { data: orders } = await getAllWorkorders();
+      if (orders.error) {
+        toast.error(orders.error);
+      }
       this.setState({ orders: orders });
 
+
       const { data } = await getUser(this.props.match.params.id);
+      console.log(data);
+      
       this.setState(() => ({
         user: data.user,
         load: true

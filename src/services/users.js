@@ -1,7 +1,7 @@
 // import getAllWorkorders from "./workOrders";
 import http from "./httpService" ;
 import qs from "qs"
-import $ from "jquery" ;
+
 
 // const allWorkOrders = getAllWorkorders();
 
@@ -71,20 +71,10 @@ export function saveUser(user) {
  
 }
 
-export function deleteUser() {
-//   console.log("test2");
+export function deleteUser(userId) { 
   
-//   $.ajax({
-//     url: "http://localhost:3500/admin/users/5cf4344c5f4fda2348dd54cd",
-//     type: "DELETE",
-//     success: function(result){
-//         console.log(result);
-//     }   
-// });
-    
-console.log("test3");  
+  return http.post(`http://localhost:3500/admin/users/${userId}` ) ;
 
-  // return http.delete(`http://localhost:3500/admin/users/5cf4344c5f4fda2348dd54cd`, {"Content-Type": "application/json"} ) ;
 }
 
 export default function getAllUsers() {

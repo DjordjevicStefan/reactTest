@@ -10,8 +10,19 @@
 # "region": "Denver5"
 # }
 
-DELETE http://localhost:3500/admin/users/5cf65ba3fb8d2ea33366d5a7
+# POST http://localhost:3500/admin/users/5cf69001ff8a951fd85f7290
+# content-type: application/json
+
+# GET http://localhost:3500/admin/users/5cee78500d7d35097041b261 
+# content-type: application/json
+
+
+POST http://localhost:3500/admin/newVendor/ 
 content-type: application/json
 
-# GET http://localhost:3500/admin/users/5cee78500d7d35067041b261 
-# content-type: application/json
+{
+"email": "tebe@gmail.com",
+"firstName": "Haos",
+"lastName": "PAKAO",
+"profession": "shrooms"
+}
