@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import Input from "../common/input";
-import {Modal} from "react-bootstrap" ;
-
-
 
 
 class UserForm extends Component {
@@ -23,12 +20,14 @@ class UserForm extends Component {
         
     } = this.props;
 
+   
+
     return (
       <div>
         <div className="form-container">
           <div>
          
-            <form onSubmit={onSubmit} className="form-css">
+            <form onSubmit={onSubmit} className="form-css" >
               <Input  
                 error={error.firstName}
                 label="First name"

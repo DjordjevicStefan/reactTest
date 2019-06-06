@@ -16,3 +16,21 @@ export function deleteVendor(vendorId) {
 
 }
 
+export function saveVendor(vendor) {
+  if (vendor._id === "") {
+    
+    return http.post(`http://localhost:3500/admin/newVendor`, qs.stringify({
+    email: vendor.email, 
+    firstName: vendor.firstName,
+    lastName: vendor.lastName,
+    profession: vendor.profession
+})) ;
+  } 
+  return http.post(`http://localhost:3500/admin/editVendor/${vendor._id}`, qs.stringify({
+    email: vendor.email, 
+    firstName: vendor.firstName,
+    lastName: vendor.lastName,
+    profession: vendor.profession
+  })) ;
+ 
+}
