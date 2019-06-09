@@ -11,6 +11,7 @@ import Users from './components/users';
 import User from './components/user';
 import Vendors from './components/vendors';
 import Vendor from './components/vendor';
+import Items from './components/items';
 
 
 function App() {
@@ -23,7 +24,8 @@ function App() {
          <Route path="/admin/users"  component={Users} />
          <Route path="/admin/vendor/:id"  component={Vendor} />
          <Route path="/admin/vendors"  component={Vendors} />
-         <Route path="/admin"  component={AdminPanel} />
+         <Route path= "/admin/items"  component={Items} />
+          <Route path="/admin"  component={AdminPanel} />
         
          {/* <Redirect to="/admin" /> */}
        </Switch>

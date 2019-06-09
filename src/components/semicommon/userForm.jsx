@@ -76,7 +76,7 @@ class UserForm extends Component {
 
               <div className="row">
               <div className="col-6">
-                <button onClick={onBack} className="btn-form-submit">
+                <button type="button" onClick={onBack} className="btn-form-submit">
                   Back
                 </button>
               </div>

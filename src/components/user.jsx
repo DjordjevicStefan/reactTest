@@ -95,7 +95,8 @@ class User extends Component {
 
   //// go back on btn click
   handleBack = () => {
-    this.props.history.push("/admin/users");
+    this.props.history.goBack() ;
+    // this.props.history.push("/admin/users");
   };
 
   /////// handle show modal

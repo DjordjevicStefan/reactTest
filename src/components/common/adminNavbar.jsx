@@ -16,7 +16,7 @@ const AdminNavbar = (props) => {
         <Link className="nav-link my-nav-link" to="/admin/vendors" >Vendors</Link>
       </li>
       <li className="ml-2 nav-item">
-        <Link className="nav-link my-nav-link" to="/items" >Items</Link>
+        <Link className="nav-link my-nav-link" to="/admin/items" >Items</Link>
       </li>
       <li className="ml-2 nav-item">
         <Link className="nav-link my-nav-link" to="/jobs" >Jobs</Link>

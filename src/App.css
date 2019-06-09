@@ -25,6 +25,15 @@
 
 /* custom bootstrap colors and mine custom bootstrpa css  */
 
+.padding-b {
+  padding-bottom: 0 !important ;
+}
+
+
+.item-table-show {
+  display: none ;
+}
+
 .error-row {
   margin-left: auto ;
   margin-right: auto ;
@@ -83,6 +92,10 @@
 }
 
 /* custom buttons  */
+
+.btn-line-hight {
+  line-height:  0 !important ;
+}
 
 .mdc-button {
   background-color: #FFD740;

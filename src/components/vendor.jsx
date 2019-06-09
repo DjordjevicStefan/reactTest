@@ -82,7 +82,8 @@ export class Vendor extends Component {
    
   //// uradi back sa logikom na refresh stranice
   handleBack = () => {
-    this.props.history.push("/admin");
+    this.props.history.goBack() ;
+    // this.props.history.push("/admin");
   }
 
   handleInputChange = (e) => {

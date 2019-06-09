@@ -16,13 +16,16 @@
 # GET http://localhost:3500/admin/users/5cee78500d7d35097041b261 
 # content-type: application/json
 
+# GET http://localhost:3500/admin/newItem 
+# content-type: application/json
 
-POST http://localhost:3500/admin/newVendor/ 
+
+POST http://localhost:3500/admin/newItem 
 content-type: application/json
 
 {
-"email": "tebe@gmail.com",
-"firstName": "Haos",
-"lastName": "PAKAO",
-"profession": "shrooms"
+"name": "Test2",
+"subCategory": "test2",
+"room": "Guest Bathroom",
+"price": 5
 }
