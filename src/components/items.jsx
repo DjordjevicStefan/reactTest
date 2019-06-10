@@ -4,136 +4,142 @@ import TableName from "./common/tableName";
 
 import { toast, ToastContainer } from "react-toastify";
 
-import { getRooms, getItemsFromRoom, saveNewItem, deleteItem, editItem} from "../services/items";
+import {
+  getRooms,
+  getItemsFromRoom,
+  saveNewItem,
+  deleteItem,
+  editItem
+} from "../services/items";
 
 import ItemsTable from "./semicommon/itemsTable";
-
 
 export default class Items extends Component {
   state = {
     rooms: null,
     load: false,
-    selectedRoom : { items : [], room : ""},
-    itemsTableShow : false ,
-    newItem : {},
-    
-    
+    selectedRoom: { items: [], room: "" },
+    itemsTableShow: false,
+    newItem: {
+      name: "",
+      subCategory: "",
+      price: ""
+    }
   };
 
+  //// fetching all rooms from database
   async componentDidMount() {
     const { data: rooms } = await getRooms();
-
     this.setState(() => ({
       rooms: rooms,
       load: true
     }));
   }
-  
-  
 
-  handleChange = async (e) => {
+  //// handling select options and returning items from selected room
+  handleChange = async e => {
     if (e.target.value === "select") {
-      this.setState({itemsTableShow : false}) ; return
+      this.setState({ itemsTableShow: false });
+      return;
     }
 
-
-    
-    const { data : selectedRoom} = await getItemsFromRoom(e.target.value);
-    if (selectedRoom.error) { toast.error(selectedRoom.error); return } ;
+    const { data: selectedRoom } = await getItemsFromRoom(e.target.value);
+    if (selectedRoom.error) {
+      toast.error(selectedRoom.error);
+      return;
+    }
     this.setState(() => ({
-      selectedRoom : selectedRoom ,
-      itemsTableShow : true
-    })) ;
+      selectedRoom: selectedRoom,
+      itemsTableShow: true
+    }));
+  };
 
-    
-    
+  //// new item submit , after the submit i re-render all items and clean the input fields
+  handleNewSubmit = async name => {
+    const itemReady = { ...this.state.newItem };
+    itemReady.room = name;
 
-  }
-
-  handleNewSubmit = async (name) => {
-    const itemReady = {...this.state.newItem} 
-    itemReady.room = name ;
-    
-    const {data} = await saveNewItem(itemReady) ;
+    const { data } = await saveNewItem(itemReady);
     if (data.error) {
-        toast.error("Item add error, please fill all fields and try again")      
+      toast.error("Item add error, please fill all fields and try again");
     } else {
-      toast.success("Item successfully added" , { autoClose: 2300 } )
-    } ;
+      toast.success("Item successfully added", { autoClose: 2300 });
+    }
 
-
-    const { data : selectedRoom} = await getItemsFromRoom(name);
-    if (selectedRoom.error) { toast.error(selectedRoom.error); return } ;
+    const { data: selectedRoom } = await getItemsFromRoom(name);
+    if (selectedRoom.error) {
+      toast.error(selectedRoom.error);
+      return;
+    }
     this.setState(() => ({
-      selectedRoom : selectedRoom ,
-      itemsTableShow : true,
-      name : "test"
-    })) ;
+      selectedRoom: selectedRoom,
+      itemsTableShow: true,
+      newItem: {
+        name: "",
+        subCategory: "",
+        price: ""
+      }
+    }));
+  };
 
-    
-    
-}
-
-  handleInputNew = (e) => {
+  //// hadnle for new user input
+  handleInputNew = e => {
     const newItem = { ...this.state.newItem };
     newItem[e.target.name] = e.target.value;
 
     this.setState(() => ({
-      newItem : newItem
+      newItem: newItem
     }));
-  }
+  };
 
-  handleInputChange = (event) => {
+  //// all inputs hadnle.
+  handleInputChange = event => {
+    const itemsProp = this.state.selectedRoom.items;
 
-    const itemsProp = this.state.selectedRoom.items ;
-     
-     
-     const itemArrey = itemsProp.filter(x => x._id === event.target.id);
-     itemArrey[0][event.target.name] = event.target.value;
-     
+    const itemArrey = itemsProp.filter(x => x._id === event.target.id);
+    itemArrey[0][event.target.name] = event.target.value;
 
-     this.setState({
-      selectedRoom : {items : itemsProp, room : this.state.selectedRoom.room}
-    }) 
-     
-    
-    
-     
-  }
-
-  handleEdit = async (item) => {
-
-   const { data } = await editItem(item) ;
-   if (data.success) {
-     toast.success("Item successfully edited" , { autoClose: 2300 } )
-   } else {
-      toast.error("Database error");
-   }
-
-  }
-
-  handleDelete = async (itemId)=>{
-    
-    const selectedRoomCopy = {...this.state.selectedRoom} ;
-
-    let yesNo = window.confirm(`Are you sure you want to delete this item?`)
-     
-    if (yesNo === true) {
-    const newItemsArrey = selectedRoomCopy.items.filter(item => item._id !== itemId )
     this.setState({
-      selectedRoom : {items : newItemsArrey, room : this.state.selectedRoom.room}
-    }) 
+      selectedRoom: { items: itemsProp, room: this.state.selectedRoom.room }
+    });
+  };
+
+  //// submiting edited item to database
+  handleEdit = async item => {
+    const { data } = await editItem(item);
+    if (data.success) {
+      toast.success("Item successfully edited", { autoClose: 2300 });
     } else {
-         return ;
+      toast.error("Database error");
+    }
+  };
+
+  //// delete item. if an error occurs the previous state is set back
+  handleDelete = async itemId => {
+    const selectedRoomCopy = { ...this.state.selectedRoom };
+
+    let yesNo = window.confirm(`Are you sure you want to delete this item?`);
+
+    if (yesNo === true) {
+      const newItemsArrey = selectedRoomCopy.items.filter(
+        item => item._id !== itemId
+      );
+      this.setState({
+        selectedRoom: {
+          items: newItemsArrey,
+          room: this.state.selectedRoom.room
+        }
+      });
+    } else {
+      return;
     }
 
-    const {data} = await deleteItem(itemId) ;
+    const { data } = await deleteItem(itemId);
     if (data.error) {
-       toast.error("Database error, please try again");
-       this.setState({selectedRoom : selectedRoomCopy })
+      toast.error("Database error, please try again");
+      this.setState({ selectedRoom: selectedRoomCopy });
     }
-
-}
+  };
 
   render() {
     if (this.state.load === false) {
@@ -146,7 +152,7 @@ export default class Items extends Component {
       );
     }
 
-    const {rooms} = this.state ;
+    const { rooms } = this.state;
 
     return (
       <>
@@ -154,32 +160,33 @@ export default class Items extends Component {
         <AdminNavbar pageName="Room items" />
         <TableName tablename="Add,edit and delete items from rooms" />
         <div className="form-container">
-        <form>
-          <div className="form-group row">
-            <span  className="col-sm-2 lead">
-              Select room :
-            </span>
-            <div className="col-sm-10">
-              <select onChange={this.handleChange} className="form-control form-control-sm">
-                 <option>select</option>
-                 {rooms.map(room => (<option key={room._id}>{room.name}</option>))}
-              </select>
+          <form>
+            <div className="form-group row">
+              <span className="col-sm-2 lead">Select room :</span>
+              <div className="col-sm-10">
+                <select
+                  onChange={this.handleChange}
+                  className="form-control form-control-sm"
+                >
+                  <option>select</option>
+                  {rooms.map(room => (
+                    <option key={room._id}>{room.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-        </form>
-        <ItemsTable 
-        itemsTableShow={this.state.itemsTableShow}
-        selectedRoom={this.state.selectedRoom}
-        submitNew={this.handleNewSubmit}
-        onChangeNew={this.handleInputNew}
-        onChange={this.handleInputChange}
-        deleteItem ={this.handleDelete}
-        editItem={this.handleEdit}
-        renderNewItem={this.state.renderNewItem}
-        
-        />
-        
-
+          </form>
+          <ItemsTable
+            itemsTableShow={this.state.itemsTableShow}
+            selectedRoom={this.state.selectedRoom}
+            submitNew={this.handleNewSubmit}
+            onChangeNew={this.handleInputNew}
+            onChange={this.handleInputChange}
+            deleteItem={this.handleDelete}
+            editItem={this.handleEdit}
+            renderNewItem={this.state.renderNewItem}
+            newItem={this.state.newItem}
+          />
         </div>
       </>
     );
