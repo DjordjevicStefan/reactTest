@@ -25,6 +25,14 @@
 
 /* custom bootstrap colors and mine custom bootstrpa css  */
 
+.th-text-align {
+  text-align: -webkit-center ;
+}
+
+.reset-mb {
+  margin-bottom:  0  !important;
+}
+
 .padding-b {
   padding-bottom: 0 !important ;
 }
@@ -78,6 +86,10 @@
   cursor: pointer ;
 }
 
+.container-bg {
+  background-color: #EEEEEE ;
+}
+
 .form-container{
   width: 70vw ;
   background-color: #EEEEEE ;
@@ -89,6 +101,28 @@
 
 .form-css{
   margin-bottom: -1rem ;
+}
+
+.border-b {
+  border-bottom : 2px solid black ;
+}
+
+.table-border-bottom {
+  border-bottom : 0.8rem solid black;
+  box-shadow:0px 2px 2px black;
+}
+
+.div-status {
+  width: 0.5rem ;
+  height:  0.5rem; 
+}
+
+.green-status {
+  color: #08e22c ;
+}
+
+.padding-jobs {
+  padding-top: 0.2rem;
 }
 
 /* custom buttons  */
@@ -113,6 +147,9 @@
   line-height: 2rem ;
 }
 
+.btn-dsp-block {
+  display: block ;
+}
 
 
 .btn-table-end:hover {

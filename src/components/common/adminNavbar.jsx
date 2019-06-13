@@ -19,7 +19,7 @@ const AdminNavbar = (props) => {
         <Link className="nav-link my-nav-link" to="/admin/items" >Items</Link>
       </li>
       <li className="ml-2 nav-item">
-        <Link className="nav-link my-nav-link" to="/jobs" >Jobs</Link>
+        <Link className="nav-link my-nav-link" to="/admin/jobs" >Jobs</Link>
       </li>
       <li className="ml-2 nav-item">
         <Link className="nav-link my-nav-link" to="/admin" >Work orders</Link>

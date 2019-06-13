@@ -83,9 +83,7 @@ class User extends Component {
   }
 
   getUserWorkOrders = (userId) => {
-    const woArrey = this.state.orders.filter(order => order.userId === userId);
-
-    console.log(woArrey);
+    const woArrey = this.state.orders.filter(order => order.user._id === userId);
     return woArrey ;
     
   }

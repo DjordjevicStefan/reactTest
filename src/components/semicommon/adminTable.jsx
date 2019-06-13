@@ -67,10 +67,10 @@ const AdminTable = ({ allOrders, status, onChange, onSort, sortColumn, checkEmpt
           {sorted.map(order => (
             
             <tr key={order._id}>
-              <td> <button className="mdc-button btn-sm btn">Select</button> </td>
+              <td> <Link to={`/admin/workorder/${order._id}`} className="mdc-button btn-sm btn">Select</Link> </td>
               <td>{order.buildingNumber}</td>
               <td>{order.apartmentNumber}</td>
-              <td> {findUser(order.userId)}</td> 
+              <td> {findUser(order.user._id)}</td> 
               <td>{order.status}</td>
             </tr>
             
