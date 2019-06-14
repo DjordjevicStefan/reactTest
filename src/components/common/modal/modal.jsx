@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom"
 
 import { Modal } from "react-bootstrap";
 
@@ -28,14 +29,19 @@ class ModalMy extends Component {
             <Modal.Title>{firstName+" "+lastName +" work orders"}</Modal.Title>
           </Modal.Header>
           <Modal.Body>{
-            <ul>
-                {workOrders.map(order => <li key={order._id}> {order._id}</li> )}   
-             </ul> }
+             <>
+                {workOrders.map(order => 
+                <div className="row">
+                  <div className="col-sm-4"> <Link to={`/admin/workorder/${order._id}`}>
+                  Open workorder  </Link> </div>
+                  <div className="col-sm-4">Building num : {order.buildingNumber}</div>
+                  <div className="col-sm-4">Workorder send time: {order.sendTime.substring(0, 19)}</div>
+                </div> )}   
+             </>   
+              }
             </Modal.Body>
           <Modal.Footer>
-            {/* <button className="btn btn-primary" onClick={onClose}>
-              Close
-            </button> */}
+            
             <button className="btn mdc-button" onClick={onClose}>
               Go back
             </button>

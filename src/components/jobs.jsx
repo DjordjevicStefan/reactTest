@@ -28,7 +28,7 @@ export default class Jobs extends Component {
       workorders : workorders,
       load: true,
       
-    });
+    }, () => this.populateJobsArrey());
   }
 
   handleJobStateSelect = (e) => {
@@ -37,7 +37,22 @@ export default class Jobs extends Component {
        jobStateSelect : select 
      });
   }
+  
+  populateJobsArrey = () => {
+    const jobs = this.state.jobs ;
+    const vendors = this.state.vendors;
+    const workorders = this.state.workorders;
+    jobs.map(job => job.vendor = vendors.find(vendor=> job.vendorId === vendor._id) ); 
+    jobs.map(job => job.workorder = workorders.find(wo=> job.workorderId === wo._id) );
+    
 
+    this.setState({
+      jobs : jobs
+    })
+  }
+
+  
+  
 
   render() {
     if (this.state.load === false) {
@@ -50,8 +65,11 @@ export default class Jobs extends Component {
       );
     }
 
+    
+
     return (
-      <>
+      <> 
+        
         <ToastContainer />
         <AdminNavbar pageName="Jobs" />
         <div className="container container-bg">
@@ -69,7 +87,7 @@ export default class Jobs extends Component {
           </form>
           {(this.state.jobStateSelect === "by jobs status" || this.state.jobStateSelect === null ) ? null : 
           <JobsTable 
-             jobStateSelect={this.jobStateSelect}
+             jobStateSelect={this.state.jobStateSelect}
              jobs={this.state.jobs}
              vendors ={this.state.vendors}
           /> }

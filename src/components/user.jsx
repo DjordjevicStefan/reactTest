@@ -69,7 +69,7 @@ class User extends Component {
 
 
       const { data } = await getUser(this.props.match.params.id);
-      console.log(data);
+      
       
       this.setState(() => ({
         user: data.user,

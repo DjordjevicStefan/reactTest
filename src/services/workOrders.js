@@ -21,9 +21,9 @@ export function assignJob(jobId, job, vendor, workorder){
 
 
 
-  return http.post(`http://localhost:3500/admin/assignJob/${jobId}` , qs.stringify(
-         {
-      job : {
+  return http.post(`http://localhost:3500/admin/assignJob/${jobId}` , JSON.stringify(
+     {   
+      "job" : {
          id : job._id ,
          status : "sent" ,
          name : job.name ,
@@ -36,26 +36,26 @@ export function assignJob(jobId, job, vendor, workorder){
          vendorId : job.vendorId,
          assignmentDate : job.assignmentDate     
       },
-      vendor : {
+      "vendor" : {
          id : vendor._id ,
          firstName : vendor.firstName,
          lastName : vendor.lastName,
          email : vendor.email ,
          profession : vendor.profession, 
        },
-      workorder : {
+      "workorder" : {
         id : workorder._id ,
         status : workorder.status,
         buildingNumber : workorder.buildingNumber,
         apartmentNumber : workorder.apartmentNumber
       } 
 
-}
+    }
    
   ))}
 
 
-
+// dummy data for back
 //   {
 //     job : {
 //        id: "5cebd0661c9d440000fe87b1",
