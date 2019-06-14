@@ -43,7 +43,7 @@ class Users extends Component {
     }
    
     const response  = await deleteUser(userX._id);
-      console.log(response);
+      // console.log(response);
 
       if (response.data.error) {
           toast.error(response.data.error);

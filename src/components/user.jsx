@@ -140,7 +140,7 @@ class User extends Component {
     const result = await saveUser(this.state.user);
 
     if (result.data.success) {
-      console.log("otkinuo submit na back dugme forme");
+      // console.log("otkinuo submit na back dugme forme");
 
       this.handleBack();
     }

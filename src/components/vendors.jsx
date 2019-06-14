@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import AdminNavbar from "./common/adminNavbar";
-import { getAllVendors, getVendor, deleteVendor } from "../services/vendor";
+import { getAllVendors, deleteVendor } from "../services/vendor";
 import { toast, ToastContainer } from "react-toastify";
 import TableName from "./common/tableName";
 import { Link } from "react-router-dom";
-import { async } from "q";
+
 
 
 class Vendors extends Component {

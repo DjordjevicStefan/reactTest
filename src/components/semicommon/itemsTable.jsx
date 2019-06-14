@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 class ItemsTable extends Component {
-  // state = {  }
 
   render() {
     const {

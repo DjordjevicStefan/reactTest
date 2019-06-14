@@ -4,12 +4,12 @@ import AdminNavbar from "./common/adminNavbar";
 import TableName from "./common/tableName";
 import WorkOrderTable from "../components/semicommon/workOrderTable";
 
-import { getAllVendors, getVendor } from "../services/vendor";
+import { getAllVendors } from "../services/vendor";
 import { getWorkOrder , assignJob } from "../services/workOrders";
 import getAllUsers from "../services/users";
 
 import { toast, ToastContainer } from "react-toastify";
-import { async } from "q";
+
 
 
 export default class WorkOrder extends Component {

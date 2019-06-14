@@ -8,7 +8,7 @@ import TableName from "./common/tableName";
 import VendorForm from "../components/semicommon/vendorForm"
 
 import Joi from "joi";
-import { async } from 'q';
+
 
 export class Vendor extends Component {
    state = {
@@ -50,7 +50,7 @@ export class Vendor extends Component {
     }
 
      const { data : vendor } = await getVendor(userId) ;
-     console.log(vendor);
+    //  console.log(vendor);
      
       if (vendor.error) {
          toast.error("Database error,vendor not found");
@@ -87,7 +87,7 @@ export class Vendor extends Component {
   }
 
   handleInputChange = (e) => {
-    console.log("idemo");
+    
     
     const newVendorState = { ...this.state.vendor };
     newVendorState[e.target.name] = e.target.value;

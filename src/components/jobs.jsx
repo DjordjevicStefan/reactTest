@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
-import { getAllVendors, getVendor } from "../services/vendor";
+import { getAllVendors } from "../services/vendor";
 import { getJobs, getAllWorkorders } from "../services/jobs";
-import { toast, ToastContainer } from "react-toastify";
+import {  ToastContainer } from "react-toastify";
 
 import AdminNavbar from "./common/adminNavbar";
 import TableName from "./common/tableName";

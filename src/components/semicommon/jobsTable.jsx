@@ -37,7 +37,7 @@ export default function JobsTable(props) {
              <td>{job.workorder.buildingNumber}</td>
              <td>{job.workorder.apartmentNumber}</td>
              <td>{(job.vendor) ?  job.vendor.firstName +" " + job.vendor.lastName : "not selected"}</td>
-             <td>{(job.assignmentDate === null) ?  "not assigned" : job.assignmentDate} </td>
+             <td>{(job.assignmentDate === null) ?  "not assigned" : job.assignmentDate.substring(0, 19)} </td>
            </tr>
            <tr className="table-border-bottom">
              <th>Room: <span className="font-weight-normal"> {job.room} </span></th>
